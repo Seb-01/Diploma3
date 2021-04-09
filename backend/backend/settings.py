@@ -75,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+# заменяем стандартную джанговскую модель User своей
 AUTH_USER_MODEL = 'eshopapi.User'
 
 # Database

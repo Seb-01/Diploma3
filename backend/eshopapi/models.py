@@ -99,7 +99,7 @@ class User(AbstractUser):
     )
     is_active = models.BooleanField(
         _('active'),
-        # влияет на admin-ку - если default=Falseв админку не зайдешь
+        # влияет на admin-ку - если default=False в aдминку не зайдешь
         # при этом будет писать всякую чушь: типа проверь email и пароль))
         default=True,
         help_text=_(
@@ -108,6 +108,7 @@ class User(AbstractUser):
         ),
     )
 
+    # возьмется от родительской модели
     """
     is_staff = models.BooleanField(
         _('staff status'),
@@ -151,7 +152,7 @@ class Shop(models.Model):
         return '{0}/{1}'.format(self.name, filename)
 
     # файл с прайс-листом
-    price_list = models.FileField(upload_to=user_directory_path)
+    price_list = models.FileField(upload_to=user_directory_path, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Магазин'
