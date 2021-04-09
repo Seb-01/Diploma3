@@ -108,6 +108,15 @@ class User(AbstractUser):
         ),
     )
 
+    is_admin = models.BooleanField(
+        _('admin'),
+        # администратор магазина
+        default=False,
+        help_text=_(
+            'Flag - whether the user is an administrator.'
+        ),
+    )
+
     # возьмется от родительской модели
     """
     is_staff = models.BooleanField(
