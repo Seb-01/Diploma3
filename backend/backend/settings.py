@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'eshopapi',
+    'users',
 
 ]
 
@@ -77,7 +78,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 # заменяем стандартную джанговскую модель User своей
-AUTH_USER_MODEL = 'eshopapi.User'
+AUTH_USER_MODEL = 'users.User'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -100,6 +101,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAdminUser',
     ]
 }
 
@@ -150,3 +152,5 @@ MEDIA_ROOT = BASE_DIR.joinpath('media')
 if DEBUG:
     print(MEDIA_ROOT)
     print(DEBUG)
+
+LOGOUT_REDIRECT_URL =  '/'

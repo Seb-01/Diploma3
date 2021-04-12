@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from eshopapi.views import UserViewSet
+from users.views import UserViewSet
 from rest_framework.authtoken import views
+from users.views import AuthViewSet
 
 
 urlpatterns = [
@@ -25,13 +26,18 @@ urlpatterns = [
 ]
 
 # Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'api/v1/users', UserViewSet)
+
+# Note that if the viewset does not include a queryset attribute then you must
+# set basename when registering the viewset.
+router.register(r'api/auth', AuthViewSet, basename='auth')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns += [
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # Default login/logout views
+    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', views.obtain_auth_token) # вьюха для получения токена
 ]
