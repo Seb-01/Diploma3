@@ -7,16 +7,10 @@ from rest_framework.authentication import BasicAuthentication, TokenAuthenticati
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.response import Response
 
+from eshopapi.permissions import MyIsAdminUser
 from users import serializers
-from users.serializers import UserViewSerializer
+from users.serializers import UserSerializer
 from users.utils import get_and_authenticate_user, create_user_account
-
-class MyIsAdminUser(IsAdminUser):
-    """
-
-    """
-    def has_permission(self, request, view):
-        return bool(request.user and request.user.is_admin and request.user.is_superuser)
 
 # Create your views here.
 
@@ -24,15 +18,15 @@ User = get_user_model()
 
 class UserViewSet(viewsets.ModelViewSet):
     # добавим аутентификацию
-    #authentication_classes = [BasicAuthentication, TokenAuthentication]
+    authentication_classes = [BasicAuthentication, TokenAuthentication]
     # здесь только через токен
-    authentication_classes = [TokenAuthentication, ]
+    # authentication_classes = [TokenAuthentication, ]
 
     # и авторизацию
     permission_classes = [MyIsAdminUser, ]
 
     queryset = User.objects.all()
-    serializer_class = UserViewSerializer
+    serializer_class = UserSerializer
 
 """
 ViewSet actions
@@ -42,7 +36,7 @@ create/retrieve/update/destroy style actions
 
 """
 
-class AuthViewSet(viewsets.GenericViewSet):
+class AuthViewSet(viewsets.ModelViewSet):
     # любой желающий может выполнять функции входа в систему
     permission_classes = [AllowAny, ]
     # заглушка,

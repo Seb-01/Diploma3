@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from users.models import User
-from eshopapi.models import Shop
+from eshopapi.models import Contact
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
 
@@ -20,7 +20,7 @@ class UserAdmin(DjangoUserAdmin):
     fieldsets = (
         (_('Уникальный идентификатор:'), {'fields': ('email', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name')}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'is_admin',
+        (_('Permissions'), {'fields': ('is_active', 'type', 'is_staff', 'is_superuser', 'is_admin',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
@@ -33,8 +33,9 @@ class UserAdmin(DjangoUserAdmin):
             'fields': ('email', 'password1', 'password2'),
         }),
     )
-    list_display = ('email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser', 'is_admin')
+    list_display = ('email', 'first_name', 'last_name', 'type', 'is_active', 'is_staff', 'is_superuser', 'is_admin')
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
 
-admin.site.register(Shop)
+# Register your models here.
+admin.site.register(Contact)

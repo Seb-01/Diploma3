@@ -3,6 +3,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework import serializers
 from django.contrib.auth.models import BaseUserManager
 from eshopapi.models import Contact
+from eshopapi.serializers import ContactSerializer
+from shops_n_goods.serializers import ShopSerializer
 
 User = get_user_model()
 
@@ -69,13 +71,9 @@ class PasswordChangeSerializer(serializers.Serializer):
         password_validation.validate_password(value)
         return value
 
-class ContactSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=Contact
-        fields = ['id', 'user', 'city', 'street', 'house', 'structure', 'building', 'apartment',
-                  'phone']
 
-class UserViewSerializer(serializers.ModelSerializer):
+
+class UserSerializer(serializers.ModelSerializer):
     """
     По дефолту сериализатор может создавать/обновлять данные.
     """
@@ -88,7 +86,16 @@ class UserViewSerializer(serializers.ModelSerializer):
     # many=True - означает, что у одного User может быть несколько контактов
     contacts=ContactSerializer(read_only=True, many=True)
 
+    """
+    Несмотря на то, что явным образом в модели User не определен поле shop, при связи один к одному неявно создается
+    # свойство, которое называется по имени зависимой модели - Shop, которое указывает на связанный объект этой модели.
+    # То есть в данном случае это свойство будет называться "shop":
+    """
+    # StringRelatedField may be used to represent the target of the relationship using its __str__ method.
+    shop=serializers.StringRelatedField()
+
     class Meta:
         model = User
         fields = ['id','company', 'username', 'email', 'position', 'is_staff', 'is_active', 'is_superuser',
-                  'type', 'contacts']
+                  'type', 'contacts', 'shop']
+        read_only_fields = ('id',)

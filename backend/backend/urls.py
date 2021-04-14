@@ -19,6 +19,7 @@ from rest_framework import routers
 from users.views import UserViewSet
 from rest_framework.authtoken import views
 from users.views import AuthViewSet
+from shops_n_goods.views import ShopsViewSet
 
 
 urlpatterns = [
@@ -31,7 +32,10 @@ router.register(r'api/v1/users', UserViewSet)
 
 # Note that if the viewset does not include a queryset attribute then you must
 # set basename when registering the viewset.
-router.register(r'api/auth', AuthViewSet, basename='auth')
+# The basename argument is used to specify the initial part of the view name pattern
+# у нас будет: api/auth/login, api/auth/logout и т.д.
+router.register(r'api/v1/auth', AuthViewSet, basename='auth')
+router.register(r'api/v1/shops', ShopsViewSet, basename='shops')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

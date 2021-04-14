@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'eshopapi',
     'users',
+    'shops_n_goods',
 
 ]
 
@@ -102,8 +103,15 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.IsAdminUser',
-    ]
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework_yaml.parsers.YAMLParser',
+    ],
+    # 'DEFAULT_RENDERER_CLASSES': [
+    #     'rest_framework_yaml.renderers.YAMLRenderer',
+    # ],
 }
+
 
 
 # Password validation
