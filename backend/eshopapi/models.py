@@ -1,9 +1,5 @@
-from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
-from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.models import AbstractUser
-from django.utils.translation import gettext_lazy as _
-from users.models import User, UserManager
+from users.models import User
 
 STATE_CHOICES = (
     ('basket', 'Статус корзины'),
@@ -43,6 +39,7 @@ class Shop(models.Model):
         return '{0}/{1}'.format(self.name, filename)
 
     # файл с прайс-листом
+    # FileField используется для хранения файлов в базе данных
     price_list = models.FileField(upload_to=user_directory_path, null=True, blank=True)
 
     class Meta:

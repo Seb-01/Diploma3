@@ -48,6 +48,8 @@ class AuthViewSet(viewsets.ModelViewSet):
         'register': serializers.UserRegisterSerializer,
     }
 
+    queryset = User.objects.all()
+
     #определим наши собственные действия для этого эндпойнта
     @action(methods=['POST', ], detail=False)
     def login(self, request):

@@ -21,6 +21,20 @@ from rest_framework.authtoken import views
 from users.views import AuthViewSet
 from shops_n_goods.views import ShopsViewSet
 
+# для управления настройками Django
+from django.conf import settings
+
+from django.conf.urls.static import static
+"""
+Return a URL pattern for serving files in debug mode.
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... the rest of your URLconf goes here ...
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+"""
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,8 +48,9 @@ router.register(r'api/v1/users', UserViewSet)
 # set basename when registering the viewset.
 # The basename argument is used to specify the initial part of the view name pattern
 # у нас будет: api/auth/login, api/auth/logout и т.д.
-router.register(r'api/v1/auth', AuthViewSet, basename='auth')
-router.register(r'api/v1/shops', ShopsViewSet, basename='shops')
+router.register(r'api/v1/auth', AuthViewSet)
+#router.register(r'api/v1/shops', ShopsViewSet, basename='shops')
+router.register(r'api/v1/shops', ShopsViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -45,3 +60,7 @@ urlpatterns += [
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', views.obtain_auth_token) # вьюха для получения токена
 ]
+# если настройки в режиме DEBUG, то MEDIA_URL также нужно добавить.
+# В противном случае не получится увидеть загружаемые файлы.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from users.models import User
-from eshopapi.models import Contact
+from eshopapi.models import Contact, Shop
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
 
@@ -39,3 +39,4 @@ class UserAdmin(DjangoUserAdmin):
 
 # Register your models here.
 admin.site.register(Contact)
+admin.site.register(Shop)
