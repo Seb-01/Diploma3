@@ -13,7 +13,6 @@ class ShopSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'url', 'user', 'state', 'price_list')
         read_only_fields = ('id','user')
 
-
 class ShopPriceListSerializer(serializers.ModelSerializer):
     """
 
