@@ -1,0 +1,61 @@
+shop: М.видео
+categories:
+  - category_id: 224
+    name: Смартфоны
+  - category_id: 155
+    name: Мониторы
+  - category_id: 100
+    name: Телевизоры
+  - category_id: 567
+    name: Пылесосы
+
+goods:
+  - id: 224100
+    category_id: 224
+    model: Samsung Note 9
+    name: Смартфон Samsung Note 9 128GB (черный)
+    price: 70000
+    price_rrc: 74000
+    quantity: 2
+    parameters:
+      "Диагональ (дюйм)": 6.5
+      "Разрешение (пикс)": 2688x1242
+      "Встроенная память (Гб)": 128
+      "Цвет": черный
+  - id: 224101
+    category_id: 224
+    model: apple/iphone/xr
+    name: Смартфон Apple iPhone XR 256GB (красный)
+    price: 65000
+    price_rrc: 69990
+    quantity: 9
+    parameters:
+      "Диагональ (дюйм)": 6.1
+      "Разрешение (пикс)": 1792x828
+      "Встроенная память (Гб)": 256
+      "Цвет": красный
+  - id: 155222
+    category_id: 155
+    model: hp 2345
+    name: Монитор HP 27f (серебристый)
+    price: 12000
+    price_rrc: 14000
+    quantity: 20
+    parameters:
+      "Диагональ (дюйм)": 27
+      "Разрешение (пикс)": 1792x828
+      "Встроенная память (Мб)": 512
+      "Цвет": серебристый
+      "Масса (кг)": 3,6
+  - id: 100345
+    category_id: 100
+    model: TCL 55
+    name: Телевизор TCL (черный)
+    price: 28500
+    price_rrc: 30500
+    quantity: 13
+    parameters:
+      "Диагональ (дюйм)": 55
+      "Разрешение (пикс)": 4000x2000
+      "Встроенная память (Гб)": 3
+      "Цвет": черный

@@ -1,0 +1,39 @@
+shop: Paradise
+categories:
+  - id: 1001
+    name: Книги
+  - id: 435
+    name: Мебель
+
+goods:
+  - id: 1001231
+    category_id: 1001
+    model: usual book
+    name: Тысяча и одна ночь
+    price: 2200
+    price_rrc: 2500
+    quantity: 120
+    parameters:
+      "Обложка (тип)": твердая
+      "Страниц (шт.)": 900
+  - id: 1001232
+    category_id: 1002
+    model: usual book
+    name: Приключения Славки
+    price: 3500
+    price_rrc: 4200
+    quantity: 10
+    parameters:
+      "Обложка (тип)": суперобложка
+      "Страниц (шт.)": 1150
+  - id: 435900
+    category_id: 435
+    model: wood furniture
+    name: Табурет обыкновенный
+    price: 1200
+    price_rrc: 1650
+    quantity: 50
+    parameters:
+      "Дерево (тип)": сосна
+      "Цвет": естественный
+

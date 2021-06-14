@@ -21,7 +21,7 @@ class ShopPriceListSerializer(serializers.ModelSerializer):
         model = Shop
         fields = ('id','price_list',)
 
-    # здесь немного своего кода добавляем, чтобы пройпдейтить переданный нам экземпляр Shop
+    # здесь немного своего кода добавляем, чтобы проапдейтить переданный нам экземпляр Shop
     def update(self, instance, validated_data):
         if backend.settings.DEBUG:
             print (instance)

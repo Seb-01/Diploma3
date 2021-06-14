@@ -1,7 +1,7 @@
 
 
 ### рабочий пример!!!
-PUT http://127.0.0.1:8000/api/v1/shops/1/upload_price
+PUT http://127.0.0.1:8000/api/v1/shops/4/upload_price
 Authorization: Basic beketov-70@bk.ru:Admin-seb#3
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
@@ -14,4 +14,93 @@ Content-Disposition: form-data; name="price_list"; filename="price2.yaml"
 Content-Type: text/yaml
 
 < ./home/slava/PycharmProjects/diploma2/price2.yaml
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+POST http://127.0.0.1:8000/api/v1/shops
+Authorization: Basic beketov-70@bk.ru:Admin-seb#3
+Content-Type: application/json
+
+{
+    "name": "М.видео",
+    "url": "https://www.mvideo.ru",
+    "state": "true"
+}
+
+###
+### Тестируем парсинг прайс-листа
+GET http://127.0.0.1:8000/api/v1/shops/1/apply_price
+Authorization: Basic beketov-70@bk.ru:Admin-seb#3
+Content-Type: application/json
+
+###
+### Тестируем парсинг прайс-листа
+GET http://127.0.0.1:8000/api/v1/shops/3
+Authorization: Basic beketov-70@bk.ru:Admin-seb#3
+Content-Type: application/json
+
+###
+### Тестируем парсинг прайс-листа - все-таки POST
+POST  http://127.0.0.1:8000/api/v1/shops/1/apply_price
+Authorization: Basic beketov-70@bk.ru:Admin-seb#3
+Content-Type: application/json
+
+### рабочий пример 2 с Мвидео!
+PUT http://127.0.0.1:8000/api/v1/shops/4/upload_price
+Authorization: Basic beketov-70@bk.ru:Admin-seb#3
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+price
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="price_list"; filename="price2-Mvideo.yaml"
+Content-Type: text/yaml
+
+< ./home/slava/PycharmProjects/diploma2/price2-Mvideo.yaml
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+GET http://127.0.0.1:8000/api/v1/shops/4
+Authorization: Basic beketov-70@bk.ru:Admin-seb#3
+Content-Type: application/json
+
+###
+### Тестируем парсинг прайс-листа - все-таки POST
+POST  http://127.0.0.1:8000/api/v1/shops/4/apply_price
+Authorization: Basic beketov-70@bk.ru:Admin-seb#3
+Content-Type: application/json
+
+###
+### Рабочий пример с Paradise
+PUT http://127.0.0.1:8000/api/v1/shops/4/upload_price
+Authorization: Basic beketov-70@bk.ru:Admin-seb#3
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+price
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="price_list"; filename="price_paradise.yaml"
+Content-Type: text/yaml
+
+< ./home/slava/PycharmProjects/diploma2/price_paradise.yaml
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+PUT http://127.0.0.1:8000/api/v1/shops/4/upload_price
+Authorization: Basic beketov-70@bk.ru:Admin-seb#3
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="text"
+
+price
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="price_list"; filename="price_paradise.yaml"
+Content-Type: text/yaml
+
+ < ./home/slava/PycharmProjects/diploma2/price_paradise.yaml
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--

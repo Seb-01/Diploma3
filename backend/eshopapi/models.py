@@ -55,6 +55,8 @@ class Category(models.Model):
     """
     Категории связаны с магазинами через m2m. Вложенных категорий не предусмотрено
     """
+    # мне нужно самому задавать и контролировать id при добавлении записей
+    category_id = models.PositiveIntegerField(verbose_name='id категории')
     name = models.CharField(max_length=40, verbose_name='Название')
     shops = models.ManyToManyField(Shop, verbose_name='Магазины', related_name='categories', blank=True)
 
@@ -62,6 +64,9 @@ class Category(models.Model):
         verbose_name = 'Категория'
         verbose_name_plural = "Список категорий"
         ordering = ('-name',)
+        # constraints = [
+        #     models.UniqueConstraint(fields=['category_id', 'shops'], name='unique_category'),
+        # ]
 
     def __str__(self):
         return self.name
@@ -71,6 +76,7 @@ class Product(models.Model):
     name = models.CharField(max_length=80, verbose_name='Название')
     category = models.ForeignKey(Category, verbose_name='Категория', related_name='products', blank=True,
                                  on_delete=models.CASCADE)
+    shops = models.ManyToManyField(Shop, verbose_name='Магазины', related_name='products_in_shop', blank=True)
 
     class Meta:
         verbose_name = 'Продукт'
@@ -89,7 +95,7 @@ class ProductInfo(models.Model):
     shop = models.ForeignKey(Shop, verbose_name='Магазин', related_name='product_infos', blank=True,
                              on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='Количество')
-    reserved = models.PositiveIntegerField(verbose_name='Зарезервировано')
+    reserved = models.PositiveIntegerField(verbose_name='Зарезервировано', default=0)
     price = models.PositiveIntegerField(verbose_name='Цена')
     price_rrc = models.PositiveIntegerField(verbose_name='Рекомендуемая розничная цена')
 
@@ -101,32 +107,22 @@ class ProductInfo(models.Model):
         ]
 
 class Parameter(models.Model):
-    name = models.CharField(max_length=40, verbose_name='Название')
-    measure_type = models.CharField(verbose_name='Тип параметра', choices=MEASURE_TYPE_CHOICES, max_length=10, default='int')
-
-    class Meta:
-        verbose_name = 'Имя параметра'
-        verbose_name_plural = "Список имен параметров"
-        ordering = ('-name',)
-
-    def __str__(self):
-        return self.name
-
-class ProductParameter(models.Model):
+    name = models.CharField(max_length=40, verbose_name='Параметр')
+    value = models.CharField(verbose_name='Значение', max_length=100)
     product_info = models.ForeignKey(ProductInfo, verbose_name='Информация о продукте',
                                      related_name='product_parameters', blank=True,
                                      on_delete=models.CASCADE)
-    parameter = models.ForeignKey(Parameter, verbose_name='Параметр', related_name='product_parameters', blank=True,
-                                  on_delete=models.CASCADE)
-    value = models.CharField(verbose_name='Значение', max_length=100)
 
     class Meta:
         verbose_name = 'Параметр'
         verbose_name_plural = "Список параметров"
+        ordering = ('-name',)
         constraints = [
-            models.UniqueConstraint(fields=['product_info', 'parameter'], name='unique_product_parameter'),
+            models.UniqueConstraint(fields=['product_info', 'name'], name='unique_product_parameter'),
         ]
 
+    def __str__(self):
+        return self.name
 
 class Contact(models.Model):
     user = models.ForeignKey(User, verbose_name='Пользователь',
