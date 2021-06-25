@@ -92,7 +92,7 @@ class ProductInfo(models.Model):
     article = models.PositiveIntegerField(verbose_name='Артикул')
     product = models.ForeignKey(Product, verbose_name='Продукт', related_name='product_infos', blank=True,
                                 on_delete=models.CASCADE)
-    shop = models.ForeignKey(Shop, verbose_name='Магазин', related_name='product_infos', blank=True,
+    shop = models.ForeignKey(Shop, verbose_name='Магазин', related_name='shops', blank=True,
                              on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='Количество')
     reserved = models.PositiveIntegerField(verbose_name='Зарезервировано', default=0)

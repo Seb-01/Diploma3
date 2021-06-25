@@ -14,6 +14,7 @@ from django.core.exceptions import ValidationError
 from requests import get
 from yaml import load as load_yaml, Loader, safe_load_all, load_all
 from django.db.models import F
+import datetime
 
 # Create your views here.
 
@@ -145,12 +146,6 @@ class ShopsViewSet(viewsets.ModelViewSet):
                             return Response({'Error': 'Product can not be created!'},
                                             status=status.HTTP_400_BAD_REQUEST)
 
-                        # 2.1.2 заполняем инфо о товаре
-                        # id: 4216292
-                        # model: apple / iphone / xr
-                        # price: 65000
-                        # price_rrc: 69990
-                        # quantity: 9
                         try:
                              product_info=ProductInfo.objects.create(model=good['model'],
                                                                 article=good['id'],
@@ -185,5 +180,39 @@ class ShopsViewSet(viewsets.ModelViewSet):
         else:
             return Response({'Error': 'Price in required'}, status=status.HTTP_428_PRECONDITION_REQUIRED)
 
+    @action(methods=['GET', ], detail=True)
+    def get_products(self, request, *args, **kwargs):
+        """
+        Выдать список товаров магазина
+        """
+        print('Выдать список товаров магазина!')
 
+        #получаем магазин
+        shop = Shop.objects.get(id=kwargs['pk'])
+        # если магазин принимает товары
+        if shop.state:
+            products_list = dict()
+            now=datetime.datetime.now()
+            products_list['date_time'] = now.strftime("%d-%m-%Y %H:%M")
+            products_list['shop_name'] = shop.name
+            user=request.user
+            products_list['user_name'] = user.email
+            products_list['user_type'] = user.type
+
+            #получаем все продукты магазина:
+            products=ProductInfo.objects.filter(shop__exact=shop)
+            # если есть продукты
+            if products:
+                for product in products:
+                    product_info= {}
+                    product_info['product_name']=product.product.name
+                    product_info['catogory_name']=product.product.category.name
+                    product_info['quantity'] = product.quantity - product.reserved
+                    product_info['price'] = product.price_rrc
+
+                    products_list[product.product.name]=product_info
+
+            return Response({'It is all products of shop': products_list}, status=status.HTTP_200_OK)
+        else:
+            return Response('This shop do not reсieve any orders', status=status.HTTP_200_OK)
 
