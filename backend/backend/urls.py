@@ -20,6 +20,7 @@ from users.views import UserViewSet
 from rest_framework.authtoken import views
 from users.views import AuthViewSet
 from shops_n_goods.views import ShopsViewSet
+from orders.views import OrdersViewSet
 
 # для управления настройками Django
 from django.conf import settings
@@ -51,6 +52,7 @@ router.register(r'api/v1/users', UserViewSet)
 router.register(r'api/v1/auth', AuthViewSet)
 #router.register(r'api/v1/shops', ShopsViewSet, basename='shops')
 router.register(r'api/v1/shops', ShopsViewSet)
+router.register(r'api/v1/orders', OrdersViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'eshopapi',
     'users',
     'shops_n_goods',
+    'orders',
 
 ]
 
@@ -105,11 +106,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAdminUser',
     ],
     'DEFAULT_PARSER_CLASSES': [
-        # 'rest_framework_yaml.parsers.YAMLParser',
-        # 'rest_framework.parsers.MultiPartParser',
-        # 'rest_framework.parsers.FormParser',
-        # 'rest_framework.parsers.FileUploadParser',
-
+        'rest_framework_yaml.parsers.YAMLParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.FileUploadParser',
     ],
     # 'DEFAULT_RENDERER_CLASSES': [
     #     'rest_framework_yaml.renderers.YAMLRenderer',

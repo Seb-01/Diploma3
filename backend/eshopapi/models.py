@@ -106,6 +106,10 @@ class ProductInfo(models.Model):
             models.UniqueConstraint(fields=['product', 'shop', 'article'], name='unique_product_info'),
         ]
 
+    def __str__(self):
+        return f'Model: {self.model}/ Article: {self.article}'
+
+
 class Parameter(models.Model):
     name = models.CharField(max_length=40, verbose_name='Параметр')
     value = models.CharField(verbose_name='Значение', max_length=100)
@@ -142,7 +146,7 @@ class Contact(models.Model):
         verbose_name_plural = "Список контактов пользователя"
 
     def __str__(self):
-        return f'{self.city} {self.street} {self.house}'
+        return f'{self.user} {self.city} {self.street} {self.house}'
 
 
 class Order(models.Model):
@@ -161,7 +165,7 @@ class Order(models.Model):
         ordering = ('-dt',)
 
     def __str__(self):
-        return str(self.dt)
+        return f'Заказ № {self.id} {self.user} {str(self.dt)}'
 
     # @property
     # def sum(self):
@@ -183,3 +187,5 @@ class OrderItem(models.Model):
             models.UniqueConstraint(fields=['order_id', 'product_info'], name='unique_order_item'),
         ]
 
+    def __str__(self):
+        return f'Position in order № {self.id} {self.product_info} Quantity={self.quantity}'

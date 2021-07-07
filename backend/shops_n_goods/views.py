@@ -205,6 +205,8 @@ class ShopsViewSet(viewsets.ModelViewSet):
             if products:
                 for product in products:
                     product_info= {}
+                    # по ID пользователь выбирает товары
+                    product_info['product_ID'] = product.id
                     product_info['product_name']=product.product.name
                     product_info['catogory_name']=product.product.category.name
                     product_info['quantity'] = product.quantity - product.reserved
