@@ -137,12 +137,22 @@ Content-Type: application/json
 }
 
 ###
-
 POST http://127.0.0.1:8000/api/v1/orders/3/add_item
 Authorization: Basic beketov-70@bk.ru:Admin-seb#3
 Content-Type: application/json
 
 {
-    "id_product_info":"20",
-    "quantity":"3"    
+    "id_product_info":"21",
+    "quantity":"5"    
 }
+
+###
+PUT http://127.0.0.1:8000/api/v1/orders/3/send_order
+Authorization: Basic vyacheslav.beketov@gmail.com:Admin-seb#3
+Content-Type: application/json
+
+###
+
+PUT http://127.0.0.1:8000/api/v1/orders/3/approved_order
+Authorization: Basic vyacheslav.beketov@gmail.com:Admin-seb#3
+Content-Type: application/json

@@ -4,6 +4,7 @@ from users.models import User
 STATE_CHOICES = (
     ('basket', 'Статус корзины'),
     ('new', 'Новый'),
+    ('send', 'Отправлен'),
     ('confirmed', 'Подтвержден'),
     ('assembled', 'Собран'),
     ('sent', 'Отправлен'),
@@ -158,6 +159,7 @@ class Order(models.Model):
     contact = models.ForeignKey(Contact, verbose_name='Контакт',
                                 blank=True, null=True,
                                 on_delete=models.CASCADE)
+    body_order=models.TextField(verbose_name='Текст письма с заказом', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Заказ'

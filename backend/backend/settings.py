@@ -166,3 +166,12 @@ if DEBUG:
     print(DEBUG)
 
 LOGOUT_REDIRECT_URL =  '/'
+
+# SMTP Mail service with decouple
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = get_env_var('EM_ACCOUNT')
+EMAIL_HOST_PASSWORD = get_env_var('EM_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
